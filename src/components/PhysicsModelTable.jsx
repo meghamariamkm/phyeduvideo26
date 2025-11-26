@@ -75,10 +75,10 @@ function VideoModelComparisonTable() {
             <tr className="bg-[#d5e0f2] text-gray-800">
               <th className="border px-3 py-2">Domain</th>
               <th className="border px-3 py-2">Model</th>
-              <th className="border px-3 py-2">SA ↑</th>
-              <th className="border px-3 py-2">PC ↑</th>
-              <th className="border px-3 py-2">MS ↑</th>
-              <th className="border px-3 py-2">TF ↑</th>
+              <th className="border px-3 py-2">Semantic Adherence ↑</th>
+              <th className="border px-3 py-2">Physics Commonsense ↑</th>
+              <th className="border px-3 py-2">Motion Smoothness ↑</th>
+              <th className="border px-3 py-2">Temporal Flickering ↑</th>
             </tr>
           </thead>
           <tbody>
@@ -184,10 +184,10 @@ function DomainCorrelationTable() {
           <thead>
             <tr className="bg-[#d5e0f2] text-gray-800">
               <th className="px-3 py-2 border">Model</th>
-              <th className="px-3 py-2 border">SA ↑</th>
-              <th className="px-3 py-2 border">PC ↑</th>
-              <th className="px-3 py-2 border">MS ↑</th>
-              <th className="px-3 py-2 border">TF ↑</th>
+              <th className="px-3 py-2 border">Semantic Adherence ↑</th>
+              <th className="px-3 py-2 border">Physics Commonsense ↑</th>
+              <th className="px-3 py-2 border">Motion Smoothness ↑</th>
+              <th className="px-3 py-2 border">Temporal Flickeing ↑</th>
             </tr>
           </thead>
   
@@ -219,57 +219,38 @@ function DomainCorrelationTable() {
     const [index, setIndex] = useState(0);
   
     const tables = [
-       {
-            title: "Performance comparison across 6 domains.",
-            component: <VideoModelComparisonTable />,
-       },
-      {
-        title: "Domain-wise Correlation Table",
-        component: <DomainCorrelationTable />,
-      },
-      {
-        title: "Overall Correlation Table",
-        component: <OverallCorrelationTable />,
-      },
-      {
-        title: "Model Comparison Table",
-        component: <ModelComparisonTable />,
-      }
+      { title: "Performance comparison across 6 domains.", component: <VideoModelComparisonTable /> },
+      { title: "Domain-wise Correlation Table", component: <DomainCorrelationTable /> },
+      { title: "Overall Correlation Table", component: <OverallCorrelationTable /> },
+      { title: "Model Comparison Table", component: <ModelComparisonTable /> },
     ];
   
     const next = () => setIndex((i) => (i + 1) % tables.length);
-    const prev = () =>
-      setIndex((i) => (i - 1 + tables.length) % tables.length);
+    const prev = () => setIndex((i) => (i - 1 + tables.length) % tables.length);
   
     return (
-      <div className="w-full flex flex-col items-center gap-6 mt-10">
-  
-        {/* Header + Arrows (SINGLE SET) */}
-        <div className="flex items-center gap-6 justify-center">
+      <div className="w-full flex flex-col items-center gap-4 mt-10">
+        {/* Table with arrows on left and right */}
+        <div className="flex items-center justify-center w-full gap-4">
           <button
             onClick={prev}
-            className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 text-white"
+            className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700"
           >
             <ChevronLeft size={22} />
           </button>
   
-          <h2 className="text-2xl font-semibold text-center">
-            {tables[index].title}
-          </h2>
+          {/* Table and caption */}
+          <div className="flex flex-col items-center max-w-[1000px] w-full">
+            <div className="text-base text-gray-800 mb-2 text-center">{tables[index].title}</div>
+            <div className="w-full flex justify-center">{tables[index].component}</div>
+          </div>
   
           <button
             onClick={next}
-            className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 text-white"
+            className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700"
           >
             <ChevronRight size={22} />
           </button>
-        </div>
-  
-        {/* Table centered */}
-        <div className="w-full flex justify-center">
-          <div className="max-w-[1000px] w-full flex justify-center">
-            {tables[index].component}
-          </div>
         </div>
   
         {/* Step indicator */}
@@ -277,9 +258,7 @@ function DomainCorrelationTable() {
           {tables.map((_, i) => (
             <div
               key={i}
-              className={`h-2 w-2 rounded-full ${
-                i === index ? "bg-gray-700" : "bg-gray-300"
-              }`}
+              className={`h-2 w-2 rounded-full ${i === index ? "bg-gray-700" : "bg-gray-300"}`}
             ></div>
           ))}
         </div>
