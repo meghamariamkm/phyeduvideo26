@@ -113,7 +113,7 @@ export default function MainPage() {
           </a>
 
           <a
-            href="#"
+            href="https://arxiv.org/abs/2601.00943"
             className="px-6 py-3 rounded-full bg-gray-800 !text-white font-semibold shadow-sm hover:bg-blue-700 transition-all inline-flex items-center gap-2"
           >
             <BookOpen size={18} />
